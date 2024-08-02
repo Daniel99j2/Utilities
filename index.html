@@ -1,4 +1,38 @@
+<head>
 <title>Music++</title>
 <link rel="icon" type="image/x-icon" href="/music/music_icon.ico">
 <link rel="manifest" href="/music/manifest.json">
-<p> Hello World
+<p>Hello World</p>
+</head>
+<body>
+  <input type="text" id="playlist-url" placeholder="Enter playlist URL">
+  <button onclick="getPlaylistVideos()">Get Video IDs</button>
+  <script>
+    async function getPlaylistVideos() {
+      const playlistUrl = document.getElementById('playlist-url').value;
+      const playlistId = getPlaylistIdFromUrl(playlistUrl);
+      const apiKey = 'YOUR_API_KEY'; // Replace with your YouTube Data API key
+      const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}`;
+
+      try {
+        let videoIds = [];
+        let nextPageToken = '';
+        do {
+          const response = await fetch(apiUrl + '&pageToken=' + nextPageToken);
+          const data = await response.json();
+          data.items.forEach(item => videoIds.push(item.contentDetails.videoId));
+          nextPageToken = data.nextPageToken;
+        } while (nextPageToken);
+
+        console.log(videoIds.join(','));
+      } catch (error) {
+        console.error('Error fetching playlist videos:', error);
+      }
+    }
+
+    function getPlaylistIdFromUrl(url) {
+      const urlParams = new URLSearchParams(new URL(url).search);
+      return urlParams.get('list');
+    }
+  </script>
+</body>
