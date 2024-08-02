@@ -11,7 +11,7 @@
     async function getPlaylistVideos() {
       const playlistUrl = document.getElementById('playlist-url').value;
       const playlistId = getPlaylistIdFromUrl(playlistUrl);
-      const apiKey = 'YOUR_API_KEY'; // Replace with your YouTube Data API key
+      const apiKey = 'AIzaSyDJzIJ6m4n9fD9-XhE8J-iITbmjJ-iEwPo';
       const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}`;
 
       try {
