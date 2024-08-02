@@ -3,7 +3,7 @@
   "short_name": "Music++",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#fff",
+  "background_color": "#222222",
   "description": "Music apps are bad. This one isn't.",
   "icons": [
     {
